@@ -1,0 +1,61 @@
+
+{% load i18n widget_tweaks %}
+
+
+<form method="post">
+
+    {% csrf_token %}
+
+    <div>
+        <p>{% trans 'Leave us your phone number and we will call you back at a convenient time for you' %}</p>
+    </div>
+
+    <div class="form-group m-b-10 {% if form.mobile.errors %}has-error{% endif %}">
+        {{ form.mobile.label_tag }}
+        {{ form.mobile|add_class:"form-control input-lg" }}
+        {% if form.mobile.errors %}
+            <span class="help-block">{{ form.mobile.errors }}</span>
+        {% endif %}
+    </div>
+
+    <div class="form-group {% if form.answer_time.errors %}has-error{% endif %}">
+        {{ form.answer_time.label_tag }}
+        {{ form.answer_time }}
+        {% if form.answer_time.errors %}
+            <span class="help-block">{{ form.answer_time.errors }}</span>
+        {% endif %}
+    </div>
+
+    <div class="row m-b-10" data-role="time-fields">
+        <div class="form-group col-sm-6 {% if form.answer_start_time.errors %}has-error{% endif %}">
+            {{ form.answer_start_time.label_tag }}
+            {{ form.answer_start_time|add_class:"form-control input-lg" }}
+            {% if form.answer_start_time.errors %}
+                <span class="help-block">{{ form.answer_start_time.errors }}</span>
+            {% endif %}
+        </div>
+
+        <div class="form-group col-sm-6 {% if form.answer_end_time.errors %}has-error{% endif %}">
+            {{ form.answer_end_time.label_tag }}
+            {{ form.answer_end_time|add_class:"form-control input-lg" }}
+            {% if form.answer_end_time.errors %}
+                <span class="help-block">{{ form.answer_end_time.errors }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group m-b-10 {% if form.comment.errors %}has-error{% endif %}">
+        {{ form.comment.label_tag }}
+        {{ form.comment|add_class:'form-control'|attr:"rows:10" }}
+        {% if form.comment.errors %}
+            <span class="help-block">{{ form.comment.errors }}</span>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form.captcha }}
+        {% if form.captcha.errors %}
+            <p class="text-danger">{{ form.captcha.errors.as_text }}</p>
+        {% endif %}
+    </div>
+</form>

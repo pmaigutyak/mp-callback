@@ -1,0 +1,98 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-10 20:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: callback/__init__.py:12 callback/models.py:69
+#: callback/templates/callback/modal.html:13
+msgid "Callback"
+msgstr "Зворотній дзвінок"
+
+#: callback/models.py:14
+msgid "As fast as possible"
+msgstr "Якнайшвидше"
+
+#: callback/models.py:15
+msgid "In fixed time"
+msgstr "В зазначений час"
+
+#: callback/models.py:20
+msgid "User"
+msgstr "Користувач"
+
+#: callback/models.py:24 callback/templates/callback/email/message.html:10
+msgid "Answer time"
+msgstr "Час відповіді"
+
+#: callback/models.py:28 callback/templates/callback/email/message.html:14
+msgid "Start time"
+msgstr "Від"
+
+#: callback/models.py:31 callback/templates/callback/email/message.html:17
+msgid "End time"
+msgstr "До"
+
+#: callback/models.py:33 callback/templates/callback/email/message.html:7
+msgid "Mobile"
+msgstr "Телефон"
+
+#: callback/models.py:36
+msgid "Date created"
+msgstr "Дата створення"
+
+#: callback/models.py:38 callback/templates/callback/email/message.html:22
+msgid "Comment"
+msgstr "Коментар"
+
+#: callback/models.py:70
+msgid "Callbacks"
+msgstr "Зворотні дзвінки"
+
+#: callback/templates/callback/email/message.html:5
+msgid "New callback request #"
+msgstr "Новий запит на зворотній дзвінок #"
+
+#: callback/templates/callback/email/message.html:27
+#, fuzzy
+#| msgid "Show on site"
+msgid "View on site"
+msgstr "Показати на сайті"
+
+#: callback/templates/callback/email/subject.txt:4
+msgid "New callback request"
+msgstr "Новий запит на зворотній дзвінок"
+
+#: callback/templates/callback/form.html:10
+msgid ""
+"Leave us your phone number and we will call you back at a convenient time "
+"for you"
+msgstr ""
+"Залиште нам свій номер телефону, і ми Вам зателефонуємо у зручний для Вас час"
+
+#: callback/templates/callback/modal.html:22
+msgid "Get a call"
+msgstr "Замовити зворотній дзвінок"
+
+#: callback/templates/callback/modal.html:26
+msgid "Cancel"
+msgstr "Відмінити"
+
+#: callback/templates/callback/success_message.html:4
+msgid "Callback request was successfully sent"
+msgstr "Запит на зворотній дзвінок був успішно надісланий"
