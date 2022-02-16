@@ -3,6 +3,22 @@ from django.apps import AppConfig
 from django.utils.translation import ugettext_lazy as _
 
 
+def setup_settings(settings, is_prod, **kwargs):
+
+    settings['INSTALLED_APPS'] += [
+        app for app in [
+            'callback',
+            'captcha'
+        ] if app not in settings['INSTALLED_APPS']
+    ]
+
+    settings['JAVASCRIPT'] += [
+        app for app in [
+            'callback/modal.js',
+        ] if app not in settings['JAVASCRIPT']
+    ]
+
+
 class CallbackAppConfig(AppConfig):
 
     name = 'callback'
