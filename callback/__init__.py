@@ -12,11 +12,7 @@ def setup_settings(settings, is_prod, **kwargs):
         ] if app not in settings['INSTALLED_APPS']
     ]
 
-    settings['JAVASCRIPT'] += [
-        app for app in [
-            'callback/modal.js',
-        ] if app not in settings['JAVASCRIPT']
-    ]
+    settings['JAVASCRIPT'] += ['callback/modal.js']
 
 
 class CallbackAppConfig(AppConfig):
