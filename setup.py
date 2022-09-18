@@ -1,24 +1,23 @@
 
 from setuptools import setup, find_packages
 
-__version__ = '1.0.0'
 
 with open('requirements.txt') as f:
     requires = f.read().splitlines()
 
 
+version = '2.0.0'
 url = 'https://github.com/pmaigutyak/mp-callback'
 
 
 setup(
     name='django-mp-callback',
-    version=__version__,
+    version=version,
     description='Django callback app',
-    long_description=open('README.md').read(),
     author='Paul Maigutyak',
     author_email='pmaigutyak@gmail.com',
     url=url,
-    download_url='%s/archive/%s.tar.gz' % (url, __version__),
+    download_url='%s/archive/%s.tar.gz' % (url, version),
     packages=find_packages(),
     include_package_data=True,
     license='MIT',
