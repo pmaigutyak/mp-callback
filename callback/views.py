@@ -49,7 +49,7 @@ class CreateCallbackView(FormView):
         mail_managers(subject, html)
 
         if apps.is_installed('turbosms'):
-            from turbosms.lib import send_sms
+            from turbosms import send_sms
             send_sms('%s #%s %s' % (_('Callback'), obj.id, obj.mobile))
 
         return JsonResponse({
