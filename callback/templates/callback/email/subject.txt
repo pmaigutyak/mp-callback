@@ -1,4 +1,0 @@
-
-{% load i18n %}
-
-{% trans "New callback request" %} #{{ object.id }}

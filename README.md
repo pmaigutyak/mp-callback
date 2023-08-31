@@ -12,11 +12,7 @@ pip install django-mp-callback
 
 Add `callback` to `INSTALLED_APPS`
 
-Add js script `callback/modal.js`
-
 Add url `path('callback/', include('callback.urls')),`
-
-Add script `new CallbackModal('{% url 'callback:modal' %}');`
 
 Add admin item `ChildItem(model='callback.callback')`
 
@@ -25,4 +21,5 @@ Add admin item `ChildItem(model='callback.callback')`
 App require this packages:
 
 * django-recaptcha
+* django-mp-email
 * django-widget-tweaks

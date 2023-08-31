@@ -1,3 +1,0 @@
-Callback #{{ object.id }}{% if object.comment %}*{% endif %}
-{{ object.mobile }}
-{% if object.is_time_fixed %}{{ object.answer_start_time }}-{{ object.answer_end_time }}{% endif %}

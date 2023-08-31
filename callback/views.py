@@ -1,13 +1,13 @@
-
-from django.conf import settings
 from django.apps import apps
+from django.contrib.sites.models import Site
+from django.http.response import JsonResponse
 from django.shortcuts import render
-from django.http.response import HttpResponse
-from django.views.generic import FormView
-from django.core.mail import send_mail
 from django.template.loader import render_to_string
+from django.views.generic import FormView
+from django.utils.translation import gettext_lazy as _
 
 from callback.forms import CallbackForm
+from djmail import mail_managers
 
 
 class CreateCallbackView(FormView):
@@ -19,74 +19,43 @@ class CreateCallbackView(FormView):
 
         user = self.request.user
 
-        if user.is_authenticated:
-            return {'mobile': self.get_user_mobile(user)}
+        if user.is_authenticated and hasattr(user, 'profile'):
+            return {**self.initial, 'mobile': user.profile.mobile}
 
         return self.initial
 
     def form_valid(self, form):
 
+        referrer = self.request.GET.get("referrer", "")
+
         obj = form.save(commit=False)
+
+        if referrer:
+            site = Site.objects.get_current()
+            obj.comment += f"\nhttps://{site.domain}{referrer}"
 
         if self.request.user.is_authenticated:
             obj.user = self.request.user
 
         obj.save()
 
-        self.send_email_notification(obj)
-        self.send_sms_notification(obj)
+        subject = '%s #%s' % (_("New callback request"), obj.id)
 
-        message = render_to_string(
-            'callback/success_message.html', {'object': obj})
+        html = render_to_string('callback/email.html', {
+            'object': obj,
+            'site': Site.objects.get_current()
+        })
 
-        return HttpResponse(message)
+        mail_managers(subject, html)
+
+        if apps.is_installed('turbosms'):
+            from turbosms.lib import send_sms
+            send_sms('%s #%s %s' % (_('Callback'), obj.id, obj.mobile))
+
+        return JsonResponse({
+            "message": _('Callback request was successfully sent')
+        })
 
     def form_invalid(self, form):
         return render(
             self.request, 'callback/form.html', {'form': form}, status=403)
-
-    def send_email_notification(self, obj):
-
-        context = self.get_notifications_context(obj)
-
-        subject = render_to_string('callback/email/subject.txt', context)
-
-        html = render_to_string('callback/email/message.html', context)
-
-        send_mail(
-            subject=subject.strip(),
-            message='',
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            html_message=html,
-            recipient_list=self.get_email_recipients())
-
-    @staticmethod
-    def get_user_mobile(user):
-        try:
-            return user.profile.mobile if hasattr(user, 'profile') else ''
-        except Exception:
-            pass
-        
-        return ''
-
-    @staticmethod
-    def get_email_recipients():
-        return [a[1] for a in settings.MANAGERS]
-
-    def send_sms_notification(self, obj):
-
-        if not apps.is_installed('turbosms'):
-            return
-
-        from turbosms.lib import send_sms_from_template
-
-        context = self.get_notifications_context(obj)
-
-        send_sms_from_template('callback/sms.txt', context)
-
-    @staticmethod
-    def get_notifications_context(obj):
-        return {
-            'object': obj,
-            'site': apps.get_model('sites', 'Site').objects.get_current()
-        }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-10 20:55+0200\n"
+"POT-Creation-Date: 2023-08-31 09:59+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,67 +16,41 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: callback/__init__.py:12 callback/models.py:69
-#: callback/templates/callback/modal.html:13
+#: callback/apps.py:9 callback/models.py:25
+#: callback/templates/callback/modal.html:13 callback/views.py:53
 msgid "Callback"
 msgstr "Обратный звонок"
 
-#: callback/models.py:14
-msgid "As fast as possible"
-msgstr "Как можно скорее"
-
-#: callback/models.py:15
-msgid "In fixed time"
-msgstr "В указанное время"
-
-#: callback/models.py:20
+#: callback/models.py:11
 msgid "User"
 msgstr "Пользователь"
 
-#: callback/models.py:24 callback/templates/callback/email/message.html:10
-msgid "Answer time"
-msgstr "Время ответа"
-
-#: callback/models.py:28 callback/templates/callback/email/message.html:14
-msgid "Start time"
-msgstr "От"
-
-#: callback/models.py:31 callback/templates/callback/email/message.html:17
-msgid "End time"
-msgstr "До"
-
-#: callback/models.py:33 callback/templates/callback/email/message.html:7
+#: callback/models.py:14 callback/templates/callback/email.html:10
 msgid "Mobile"
 msgstr "Телефон"
 
-#: callback/models.py:36
+#: callback/models.py:17
 msgid "Date created"
 msgstr "Дата создания"
 
-#: callback/models.py:38 callback/templates/callback/email/message.html:22
+#: callback/models.py:19 callback/templates/callback/email.html:13
 msgid "Comment"
 msgstr "Комментарий"
 
-#: callback/models.py:70
+#: callback/models.py:26
 msgid "Callbacks"
 msgstr "Обратные звонки"
 
-#: callback/templates/callback/email/message.html:5
-msgid "New callback request #"
-msgstr "Новый запрос на обратный звонок #"
-
-#: callback/templates/callback/email/message.html:27
-#, fuzzy
-#| msgid "Show on site"
-msgid "View on site"
-msgstr "Показать на сайте"
-
-#: callback/templates/callback/email/subject.txt:4
+#: callback/templates/callback/email.html:8 callback/views.py:42
 msgid "New callback request"
 msgstr "Новый запрос на обратный звонок"
+
+#: callback/templates/callback/email.html:17
+msgid "View on site"
+msgstr "Показать на сайте"
 
 #: callback/templates/callback/form.html:10
 msgid ""
@@ -93,6 +67,6 @@ msgstr "Заказать обратный звонок"
 msgid "Cancel"
 msgstr "Отменить"
 
-#: callback/templates/callback/success_message.html:4
+#: callback/views.py:56
 msgid "Callback request was successfully sent"
 msgstr "Запрос на обратный звонок был успешно отправлен"

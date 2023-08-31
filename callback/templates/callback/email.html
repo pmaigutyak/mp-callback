@@ -1,0 +1,19 @@
+
+{% extends 'email.html' %}
+
+{% load i18n %}
+
+
+{% block content %}
+    <h2>{% trans 'New callback request' %} #{{ object.id }}</h2> <br />
+
+    <strong>{% trans 'Mobile' %}:</strong> <br />
+    {{ object.mobile }} <br /><br />
+
+    <strong>{% trans 'Comment' %}:</strong> <br />
+    {{ object.comment }} <br /><br />
+
+    <a href="https://{{ site.domain }}{% url 'admin:callback_callback_change' object.id %}">
+        {% trans 'View on site' %}
+    </a>
+{% endblock %}
