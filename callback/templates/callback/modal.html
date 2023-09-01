@@ -1,31 +1,55 @@
 
-{% load i18n %}
+{% extends "modal.html" %}
+
+{% load i18n widget_tweaks %}
 
 
-<div class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">
-                    {% trans 'Callback' %}
-                </h4>
-            </div>
-            <div class="modal-body">
-                {% include 'callback/form.html' %}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success pull-left" data-role="submit-btn">
-                    <i class="fa fa-phone"></i>
-                    {% trans 'Get a call' %}
-                </button>
+{% block title %}
+	{% trans 'Callback' %}
+{% endblock %}
 
-                <button type="button" class="btn btn-default" data-dismiss="modal">
-                    {% trans 'Cancel' %}
-                </button>
-            </div>
+
+{% block body %}
+	<form method="post">
+        {% csrf_token %}
+
+        <div>
+            <p>{% trans 'Leave us your phone number and we will call you back at a convenient time for you' %}</p>
         </div>
-    </div>
-</div>
+
+        <div class="form-group m-b-10 {% if form.mobile.errors %}has-error{% endif %}">
+            {{ form.mobile.label_tag }}
+            {{ form.mobile|add_class:"form-control input-lg" }}
+            {% if form.mobile.errors %}
+                <span class="help-block">{{ form.mobile.errors }}</span>
+            {% endif %}
+        </div>
+
+        <div class="form-group m-b-10 {% if form.comment.errors %}has-error{% endif %}">
+            {{ form.comment.label_tag }}
+            {{ form.comment|add_class:'form-control'|attr:"rows:10" }}
+            {% if form.comment.errors %}
+                <span class="help-block">{{ form.comment.errors }}</span>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.captcha }}
+            {% if form.captcha.errors %}
+                <p class="text-danger">{{ form.captcha.errors.as_text }}</p>
+            {% endif %}
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block footer %}
+	<button type="button" class="btn btn-success pull-left" data-role="submit-btn">
+        <i class="fa fa-phone"></i>
+        {% trans 'Get a call' %}
+    </button>
+
+    <button type="button" class="btn btn-default" data-dismiss="modal">
+        {% trans 'Cancel' %}
+    </button>
+{% endblock %}

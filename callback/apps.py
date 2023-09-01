@@ -14,3 +14,6 @@ class CallbackAppConfig(AppConfig):
 
         if not apps.is_installed('djmail'):
             raise Exception('`mp-callback` depends on `djmail`')
+
+        if not apps.is_installed('modal'):
+            raise Exception('`mp-callback` depends on `django-mp-modal`')

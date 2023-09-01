@@ -1,16 +1,14 @@
 from django.apps import apps
 from django.contrib.sites.models import Site
-from django.http.response import JsonResponse
-from django.shortcuts import render
 from django.template.loader import render_to_string
-from django.views.generic import FormView
 from django.utils.translation import gettext_lazy as _
-
-from callback.forms import CallbackForm
 from djmail import mail_managers
 
+from callback.forms import CallbackForm
+from modal.views import ModalFormView
 
-class CreateCallbackView(FormView):
+
+class CreateCallbackView(ModalFormView):
 
     form_class = CallbackForm
     template_name = 'callback/modal.html'
@@ -24,7 +22,7 @@ class CreateCallbackView(FormView):
 
         return self.initial
 
-    def form_valid(self, form):
+    def save_form(self, form):
 
         referrer = self.request.GET.get("referrer", "")
 
@@ -52,10 +50,10 @@ class CreateCallbackView(FormView):
             from turbosms import send_sms
             send_sms('%s #%s %s' % (_('Callback'), obj.id, obj.mobile))
 
-        return JsonResponse({
-            "message": _('Callback request was successfully sent')
-        })
+        return obj
 
-    def form_invalid(self, form):
-        return render(
-            self.request, 'callback/form.html', {'form': form}, status=403)
+    def get_success_context(self, obj):
+        return {
+            "message": _('Callback request was successfully sent')
+        }
+
